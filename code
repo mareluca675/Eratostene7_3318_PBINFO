@@ -1,0 +1,55 @@
+#include <fstream>
+#include <vector>
+
+#define ll long long
+
+using namespace std;
+
+vector<ll> ciur(1000000);
+vector<ll> produs(1000000);
+
+int main()
+{
+    ifstream cin("eratostene7.in");
+    ofstream cout("eratostene7.out");
+    
+    int i, j;
+    
+    for(i = 2; i <= 1000000; i ++)
+    {
+        produs[i] = 1;   
+    }
+    
+    for(i = 2; i <= 1000000; i ++)
+    {
+        if(ciur[i] == 0)
+        {
+            for(j = 1; i * j <= 1000000; j ++)
+            {
+                ciur[i * j] ++;
+                produs[i * j] *= i;
+            }
+        }
+    }
+    
+    int n, k, er = 0;
+    
+    cin >> n;
+    vector<int> vec(n);
+    
+    for(auto& i : vec)
+    {
+        cin >> i >> k;
+        
+        if(ciur[i] == k and produs[i] == i)
+        {
+            cout << "DA" << '\n';
+        }
+        else
+        {
+            cout << "NU" << '\n';
+        }
+    }
+
+    return 0;
+}
